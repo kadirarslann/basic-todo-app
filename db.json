@@ -1,0 +1,69 @@
+{
+  "": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "todo-groups": [
+    {
+      "id": 1,
+      "name": "Daily"
+    },
+    {
+      "id": 2,
+      "name": "Weekly"
+    },
+    {
+      "id": 3,
+      "name": "Long Term"
+    },
+    {
+      "id": 4,
+      "name": "Fuzzy"
+    }
+  ],
+  "todos": [
+    {
+      "id": 1,
+      "todos": [
+        {
+          "id": 0,
+          "text": "sampel todo ",
+          "status": "in progres"
+        },
+        {
+          "id": 1,
+          "text": "sampel todassaasaso ",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "todos": [
+        {
+          "id": 0,
+          "text": "weekly todo ",
+          "status": "in progres"
+        },
+        {
+          "id": 1,
+          "text": "weekly todo 2 ",
+          "status": "done"
+        }
+      ]
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
