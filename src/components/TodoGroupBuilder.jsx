@@ -1,10 +1,10 @@
 import { useState, useContext } from 'react';
 import { FaPlus } from 'react-icons/fa';
-import todoContextVal from '../context/TodoContext';
+import TodoContextVal from '../context/TodoContext';
 function TodoGroupBuilder()
 {
     const [name, setName] = useState("");
-    const { addTodoGroup } = useContext(todoContextVal);
+    const { addTodoGroup } = useContext(TodoContextVal);
     return (
         <div className='flex flex-auto'>
             <input className="w-full flex-grow mx-5 p-2  font-bold" type="text" value={name} onInput={(e) => { setName(e.target.value); }}

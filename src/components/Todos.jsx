@@ -5,7 +5,6 @@ import TodoCard from './TodoCard';
 
 function Todos() {
   const {todoItems} = useContext(todoContextVal)
-  console.log(todoItems)
   return (
     <div className="">
         <TodoBuilder>

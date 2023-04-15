@@ -4,12 +4,9 @@ import Todos from './components/Todos';
 import { TodoContext } from './context/TodoContext';
 import './App.css';
 
+
 function App()
 {
-  // useEffect(() =>
-  // {
-
-  // }, []);
   return (
     <>
       <div id="App" className="h-screen font-mono">

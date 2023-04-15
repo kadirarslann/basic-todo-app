@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
-
+import db from '../config/firebaseconfig.js'
+import { collection, doc, getDoc, getDocs ,query,setDoc,addDoc,deleteDoc, updateDoc,where} from "firebase/firestore";
 const todoContextVal = createContext(null);
 export default todoContextVal;
 
@@ -8,75 +9,79 @@ export function TodoContext({ children })
     const [todoGroups, setTodoGroups] = useState([]);
     const [todoItems, setTodoItems] = useState([]);
     const [activeGroup, setActiveGroup] = useState(null);
-    
-
-
 
     useEffect(() =>
     {
-        fetch("http://localhost:3000/todo-groups").then(res => res.json()).then(res =>
-        {
-            setTodoGroups(res);
-            setActiveGroup(res[0])
-        });
+        fetchTodoGroups()
     }, []);
+
+    
     useEffect(() =>
     {
-        activeGroup != null && fetch(`http://localhost:3000/todos/${activeGroup.id}`).then(res => res.json()).then(res =>
-        {
-            setTodoItems(res.todos);
-        });
+        fetchTodos()
     }, [activeGroup]);
     // useEffect(() =>
     // {
-        
+
     // });
-
-    const addTodoGroup = (name) =>
+    const fetchTodoGroups = async ()=>{
+            const todoGroupsQuery = query(collection(db, "todoGroups"));
+            const todoGroups = await getDocs(todoGroupsQuery);
+            setTodoGroups(todoGroups.docs)
+            setActiveGroup(todoGroups.docs[0]);
+    }
+    const fetchTodos = async ()=>{
+        let todos = await getDocs(query(collection(db, "todos"), where("groupId", "==", activeGroup.id)))
+        console.log(todos.docs)
+        
+        // activeGroup != null && fetch(`http://localhost:3000/todos/${activeGroup.id}`).then(res => res.json()).then(res =>
+        // {
+        //     setTodoItems(res.todos);
+        // });
+    }
+    const addTodoGroup = async (name) =>
     {
-        fetch("http://localhost:3000/todo-groups", {
-            method: "POST",
-            body: JSON.stringify({ "name": "assasas" }),
-            headers: {
-                "Content-Type": "application/json",
-
-            },
-        }).then(res => res.json()).then(res =>
-        {
-            setTodoGroups(n=>{
-                return [...n,res]
-            })    
-        });
+        const newDoc = await addDoc(collection(db, "todoGroups"), {
+           name
+          });
+        const newDocSnapshot = await getDoc(doc(db,"todoGroups",newDoc.id))
+        setTodoGroups(n =>[...n,newDocSnapshot])
     };
-    const deleteTodoGroup = (id) =>
+    const deleteTodoGroup = async (group) =>
     {
-        fetch(`http://localhost:3000/todo-groups/${id}`, {
-            method: "DELETE",
-           
-        }).then(res => res.json()).then(res =>
-        {
-            setTodoGroups(n=>{
-
-                return n.filter(group=>group.id != id)
-            })    
-        });
+        let result = await deleteDoc(group.ref);
+        setTodoGroups(prev=>{
+            return prev.filter((item)=>{
+                return group.id != item.id
+            })
+        })
     };
-    const editTodoGroup = () =>
-    {
-
-    };
-
+    const editTodoGroup = async(group,updateObj)=>{
+        await updateDoc(group.ref,updateObj)
+        let updatedDoc = await  getDoc(group.ref)
+        setTodoGroups(prev=>{
+            return prev.map((item)=>{
+                return group.id != item.id ? item : updatedDoc
+            })
+        })
+    }   
+    const AddTodo = async()=>{
+        
+    }
+   
+  
 
     return (
         <>
             <todoContextVal.Provider value={{
-                "level": 30,
                 todoGroups,
                 addTodoGroup,
                 deleteTodoGroup,
                 editTodoGroup,
                 setActiveGroup,
-                todoItems
+                todoItems,
+                AddTodo,
+                activeGroup
             }}>
                 {children}
 
