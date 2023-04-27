@@ -10,12 +10,12 @@ function TodoGroup({ group, setActiveGroup, activeGroup, deleteTodoGroup, editTo
 
   // const groupName = useRef(group.data().name) 
   return (
-    <div  >
-      <div className="text-xl font-bold bg-slate-500 text-red-50  p-5 m-5 rounded-lg flex flex-grow ">
-        {!editActive && <div className={`flex-grow hover:translate-x-1 cursor-pointer hover:text-cyan-400 px-1 ${group.id == activeGroup.id ? 'text-cyan-400' : ''}`}
+    <div className="todoGroup" >
+      <div className={`text-xl font-bold ${group.id == activeGroup.id ? 'bg-amber-300' : 'bg-amber-600'}  text-red-50  p-5 m-5 rounded-lg flex flex-grow `} >
+        {!editActive && <div className={`flex-grow hover:translate-x-1 cursor-pointer text-center hover:text-black px-1 ${group.id == activeGroup.id ? 'text-black' : ''}`}
           onClick={() => { setActiveGroup(group); }}> {group.data().name}</div>}
         {editActive && <div>
-          <input className='w-full bg-slate-300 border-red-500 text-black' type="text" value={groupName} onInput={(e) => { setGroupName(e.target.value); }} />
+          <input className='w-full bg-slate-300 border-red-500 text-black rounded-md px-1' type="text" value={groupName} onInput={(e) => { setGroupName(e.target.value); }} />
         </div>}
 
 

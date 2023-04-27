@@ -9,12 +9,12 @@ function App()
 {
   return (
     <>
-      <div id="App" className="h-screen font-mono">
+      <div id="App" className="h-screen font-mono block sm:flex h-full">
         <TodoContext>
-          <div className="w-1/5  h-full bg-violet-900 " >
+          <div className="todoGroups  w-full  sm:w-60    " >
             <TodoGroups ></TodoGroups>
           </div>
-          <div className="w-4/5  h-full bg-white">
+          <div className="todoItems w-full ">
             <Todos ></Todos>
           </div>
         </TodoContext>

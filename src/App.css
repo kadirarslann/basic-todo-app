@@ -1,4 +1,58 @@
 body{
     margin: 0px;
     padding: 0px;
+    background-image: url("./assets/img/b1.jpg");
+}
+
+.todoCard {
+    animation-name: smoothInit;
+    animation-duration: 1s;
+    box-sizing: border-box;
+}
+.todoCard>div{
+    background-image: url("./assets/img/n3.jpg");
+    background-blend-mode:  color-burn;
+    background-size: 100% 100%;
+}
+.todoGroup {
+    animation-name: smoothInit;
+    animation-duration: 1s;
+}
+.todoGroups {
+    background-repeat: repeat-y;
+    background-blend-mode:  darken;
+}
+*{
+    box-sizing: border-box;
+}
+*::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar-thumb
+{
+    border-radius: 5px;
+	background-color: #000000;
+	border: 2px solid #555555;
+}
+
+
+
+@keyframes smoothInit {
+    from {
+        /* width: 0px; */
+        opacity: 0;
+    }
+    to {
+        /* width: 100%; */
+        opacity: 1;
+    }
 }

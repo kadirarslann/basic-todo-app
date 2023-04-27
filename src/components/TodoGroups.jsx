@@ -7,10 +7,13 @@ function TodoGroups({ })
 {
   const { todoGroups, deleteTodoGroup, setActiveGroup, activeGroup,editTodoGroup } = useContext(todoContextVal);
   return (
-    <div >
+    <div className="min-w-min m-1">
+      <div className="h-24 sm:h-fit overflow-scroll overflow-x-hidden sm:overflow-hidden">
       {todoGroups.map((group) => (
-        <TodoGroup key={group.id} group={group} setActiveGroup={setActiveGroup} activeGroup={activeGroup} deleteTodoGroup = {deleteTodoGroup} editTodoGroup={editTodoGroup}></TodoGroup>
+        <TodoGroup  key={group.id} group={group} setActiveGroup={setActiveGroup} activeGroup={activeGroup} deleteTodoGroup = {deleteTodoGroup} editTodoGroup={editTodoGroup}></TodoGroup>
       ))}
+      </div>
+    
 
       <TodoGroupBuilder>
 
